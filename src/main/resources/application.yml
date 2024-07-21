@@ -1,18 +1,42 @@
 spring:
   application:
     name: mbti-travel-company
+  config:
+    import: optional:file:.env[.properties]
   datasource:
-    url: jdbc:postgresql://postgres:5432/${POSTGRES_DB}
+    url: jdbc:postgresql://${POSTGRES_HOST}:5432/${POSTGRES_DB}
     username: ${POSTGRES_USER}
     password: ${POSTGRES_PASSWORD}
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: validate
     show-sql: true
     properties:
-      hibernate.format_sql: true
-      dialect: org.hibernate.dialect.PostgreSQLDialect
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  security:
+    oauth2:
+      client:
+        registration:
+          kakao:
+            client-id: 2bc0027e9b9cb59378f5135b6cf46cb5
+            client-secret: EdwJd5lEWBHnPfASCtXxKYbpgDFm7swE
+            client-name: Kakao
+            authorization-grant-type: authorization_code
+            client-authentication-method: client_secret_post
+            redirect-uri: "{baseUrl}/{action}/oauth2/code/{registrationId}"
+            scope:
+              - profile_nickname
+              - profile_image
+              - account_email
+        provider:
+          kakao:
+            authorization-uri: https://kauth.kakao.com/oauth/authorize
+            token-uri: https://kauth.kakao.com/oauth/token
+            user-info-uri: https://kapi.kakao.com/v2/user/me
+            user-name-attribute: id
 
 springdoc:
   version: '@project.version@'

@@ -20,11 +20,11 @@ import java.sql.Timestamp;
 @EntityListeners(AuditingEntityListener.class)
 public abstract class BaseEntity {
 
-    @Column(name = "created_at")
+    @Column(name = "CREATED_AT")
     @CreatedDate
     private Timestamp createdAt;
 
-    @Column(name = "updated_at")
+    @Column(name = "UPDATED_AT")
     @LastModifiedDate
     private Timestamp updatedAt;
 
