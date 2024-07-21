@@ -1,5 +1,6 @@
 package com.travelcreation.mbti.domain.member.entity;
 
+import com.travelcreation.mbti.common.entity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,7 +14,7 @@ import java.sql.Timestamp;
 @SuperBuilder(toBuilder = true)
 @Entity
 @Table(name = "service_user")
-public class ServiceUser {
+public class ServiceUser extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,7 +41,7 @@ public class ServiceUser {
     private Timestamp usePeriodEndAt;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_role_id", nullable = false)
+    @JoinColumn(name = "USER_ROLE_ID", nullable = false)
     private ServiceUserRole role;
 
 }
